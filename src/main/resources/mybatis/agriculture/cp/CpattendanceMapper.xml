@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.cp.mapper.CpattendanceMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpattendance">
+      SELECT * FROM cpattendance order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpattendance">
+      select * from cpattendance where concat(id,code,name,dept,realTime,dayTime,deptId,leadercode) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from cpattendance where concat(id,code,name,dept,realTime,dayTime,deptId,leadercode) like '%${value}%'
+    </select>
+
+    <select id="selectCodeDayTime" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpattendance">
+        select * from cpattendance where code=#{code} and dayTime=#{dayTime}
+    </select>
+
+    <select id="selectMyAttendence" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpattendance">
+        select * from cpattendance where code=#{loginName} order by id desc  limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectMyAttendenceCount" resultType="int">
+        select count(id) from cpattendance where code=#{loginName}
+    </select>
+
+</mapper>

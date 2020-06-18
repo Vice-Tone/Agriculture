@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/addForm.css">
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>列表</legend>
+</fieldset>
+<div class="demoTable">
+    <div class="layui-inline">
+        <input class="layui-input" placeholder="输入关键字搜索：" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+
+<shiro:hasPermission name="data:add">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div>
+                <button class="layui-btn" id="addBtn">添加</button>
+            </div>
+        </div>
+    </div>
+</shiro:hasPermission>
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+<script src="/layui/layui.all.js"></script>
+<script src="/layui/jquery-3.3.1.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/javascript">
+    let layer;
+    let table;
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider', 'form'], function () {
+        let laydate = layui.laydate //日期
+            , layer = layui.layer //弹层
+            , table = layui.table; //表格
+        let form = layui.form;
+        table.render({
+            elem: '#demo'
+            , url: '/jxcwarein/list' //数据接口
+            , method: 'get'
+            , id: 'allAltTable'
+            , request: {
+                pageName: 'pageIndex'
+                , limitName: 'pageSize'
+            }
+            , title: '列表'
+            , page: true //开启分页
+            , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            , totalRow: false //开启合计行
+            , cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'id', title: '编号', hide: true}
+                    , {field: 'suppiler', title: '供应商名称'}
+                    , {field: 'receiptsCode', title: '单据编号'}
+                    , {field: 'goodInfo', title: '商品信息'}
+                    , {field: 'num', title: '数量'}
+                    , {field: 'receiptsdate', title: '单据日期'}
+                    , {field: 'operator', title: '操作员'}
+                    , {fixed: 'right', title: '操作', align: ' ', toolbar: '#barDemo'}
+                ]
+            ]
+            , done: function () {//设置某列隐藏
+                $("[data-field='receiptslongdate']").css('display', 'none');
+            }
+        });
+        var $ = layui.$, active = {
+            reload: function () {
+                var demoReload = $('#demoReload');
+                //执行重载
+                table.reload('allAltTable', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    url: "/jxcwarein/conditionlSel?value=" + demoReload.val()
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        $('#addBtn').click(function () {
+            let index = layer.open({
+                type: 1
+                , title: '添加'
+                , area: ['500px', 'auto']
+                , offset: '100px'
+                , content: ` <form class="layui-form"  id="addForm">
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >供应商名称</label>
+                             <div class='layui-input-block'>
+                              <select name="suppiler" id="suppiler1">
+                             </select>
+                             </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >单据编号</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='receiptsCode' required  lay-verify='required'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >商品信息</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='goodInfo' required  lay-verify='required'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >数量</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='num' required  lay-verify='required'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >单据日期</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='receiptsdate' required  lay-verify='required'  autocomplete='off' class='layui-input test-item'>
+                            </div>
+                        </div>
+
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >操作员</label>
+                            <div class='layui-input-block'>
+                        <select name="operator" id="operator">
+                             </select>
+                            </div>
+                        </div>
+                   <div class='layui-form-item'>
+                            <div class='layui-input-block'>
+                                <button type='button' class='layui-btn layui-btn-normal' lay-submit lay-filter='adduser'>添加</button>
+                                <button type='reset' class='layui-btn layui-btn-primary'>重置</button>
+                            </div>
+                        </div>
+                    </form>`
+                , success: function () {
+                    //同时绑定多个
+                    lay('.test-item').each(function () {
+                        laydate.render({
+                            elem: this
+                            , trigger: 'click'
+                            , type: 'date'
+                            , format: 'yyyy-MM-dd'
+                        });
+                    });
+
+                    form.render('select');
+                    $("#suppiler1").empty();
+                    $("#suppiler1").append(`<option value="默认供应商" selected="">请选择</option>`);
+                    $.ajax({
+                        url: "/jxcsuppiler/getSuppilerList",
+                        dataType: "json",
+                        async: false,
+                        success: function (ret) {
+                            for (var k = 0; k < ret.data.length; k++) {
+                                $("#suppiler1").append(`<option value="${ret.data[k].name}">${ret.data[k].name}</option>`);
+                            }
+                        }
+                    });
+                    form.render('select');
+                    $.ajax({
+                        url: "/cpworker/getWorkersList",
+                        dataType: "json",
+                        async: false,
+                        success: function (ret) {
+                            var typeList = ret.data;
+                            for (var k = 0; k < typeList.length; k++) {
+                                $("#operator").append(`<option value="${typeList[k].name}">${typeList[k].name}</option>`);
+                            }
+                        }
+                    });
+                    form.render('select');
+                    form.on('submit(adduser)', function (data) {
+                        let userData = data.field;
+                        $.ajax({
+                            type: 'POST',
+                            data: userData
+                            , dataType: 'json'
+                            , url: '/jxcwarein/add'
+                            , success: function (res) {
+                                if (res.code === 0) {
+                                    setTimeout(function () {
+                                        alert('添加成功');
+                                        //清空表单，关掉弹窗
+                                        layer.close(index);
+                                        window.location.reload();
+                                    }, 1000);
+                                } else {
+                                    setTimeout(function () {
+                                        alert('添加失败');
+                                        //清空表单，关掉弹窗
+                                        layer.close(index);
+                                        window.location.reload();
+                                    }, 1000);
+                                }
+                            }
+                            , error: function (msg) {
+                                layer.msg('网络异常，请重试');
+                            }
+                        })
+                    })
+                }
+            })
+        });
+        table.on('tool(test)', function (obj) {
+            let data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'del') {
+                layer.confirm('真的删除么', function (index) {
+                    $.ajax({
+                        url: '/jxcwarein/delete',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'id': data.id},
+                        success: function (res) {
+                            if (res.code === 0) {
+                                setTimeout(function () {
+                                    alert('删除成功');
+                                    layer.close(index);
+                                    window.location.reload();
+                                }, 1000);
+                            } else {
+                                alert(' 删除失败 ');
+                            }
+                        }
+                    })
+                    //向服务端发送删除指令
+                });
+            } else if (layEvent === 'edit') {
+                let index = layer.open({
+                    type: 1
+                    , title: '修改信息'
+                    , area: ['500px', 'auto']
+                    , offset: '100px'
+                    , content: ` <form class='layui-form' action="" id='addForm'>
+                        <div class='layui-form-item' style="display: none">
+                            <label class='layui-form-label' >编号</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='id' required  lay-verify='required'  value='${data.id}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >供应商名称</label>
+                            <div class='layui-input-block'>
+                              <select name="suppiler" id="suppiler2">
+                             </select>
+                            </div>
+
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >单据编号</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='receiptsCode' required  lay-verify='required'  value='${data.receiptsCode}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >商品信息</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='goodInfo' required  lay-verify='required'  value='${data.goodInfo}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >数量</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='num' required  lay-verify='required'  value='${data.num}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >单据日期</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='receiptsdate' required  lay-verify='required'  value='${data.receiptsdate}'  autocomplete='off' class='layui-input test-item'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >操作员</label>
+                            <div class='layui-input-block'>
+                             <select name="operator" id="operator">
+                             <option value="${data.operator}" selected="selected">${data.operator}</option>
+                             </select>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <div class='layui-input-inline' id='btngroup'>
+                                <button type='button' class='layui-btn layui-btn-normal' lay-submit lay-filter='adduser'>修改</button>
+                                <button type='reset' class='layui-btn layui-btn-primary'>重置</button>
+                            </div>
+                        </div>
+                    </form>`
+                    , success: function () {
+                        //同时绑定多个
+                        lay('.test-item').each(function () {
+                            laydate.render({
+                                elem: this
+                                , trigger: 'click'
+                                , type: 'date'
+                                , format: 'yyyy-MM-dd'
+                            });
+                        });
+                        form.render('select');
+                        $.ajax({
+                            url: "/cpworker/getWorkersList",
+                            dataType: "json",
+                            async: false,
+                            success: function (ret) {
+                                var typeList = ret.data;
+                                for (var k = 0; k < typeList.length; k++) {
+                                    $("#operator").append(`<option value="${typeList[k].name}">${typeList[k].name}</option>`);
+                                }
+                            }
+                        });
+                        form.render('select');
+                        $("#suppiler2").empty();
+                        $("#suppiler2").append(`<option value="默认供应商" selected="">请选择</option>`);
+                        $.ajax({
+                            url: "/jxcsuppiler/getSuppilerList",
+                            dataType: "json",
+                            async: false,
+                            success: function (ret) {
+                                for (var k = 0; k < ret.data.length; k++) {
+                                    $("#suppiler2").append(`<option value="${ret.data[k].name}">${ret.data[k].name}</option>`);
+                                }
+                            }
+                        });
+                        form.render('select');
+                        form.on('submit(adduser)', function (data) {
+                            let userData = data.field;
+                            $.ajax({
+                                type: 'POST',
+                                data: userData
+                                , dataType: 'json'
+                                , url: '/jxcwarein/edit'
+                                , success: function (res) {
+                                    //0 成功
+                                    //500 失败
+                                    if (res.code === 0) {
+
+                                        setTimeout(function () {
+                                            alert('修改成功');
+                                            layer.close(index);
+                                            window.location.reload();
+                                        }, 1000);
+
+                                    } else {
+
+                                        setTimeout(function () {
+                                            alert('修改失败');
+                                            layer.close(index);
+                                            window.location.reload();
+                                        }, 1000);
+
+                                    }
+                                }
+                                , error: function (msg) {
+                                    layer.msg('网络异常，请重试');
+                                }
+                            })
+                        })
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

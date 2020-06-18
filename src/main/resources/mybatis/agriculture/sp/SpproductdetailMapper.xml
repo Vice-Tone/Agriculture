@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.sp.mapper.SpproductdetailMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spproductdetail">
+      SELECT * FROM spproductdetail limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spproductdetail">
+      select * from spproductdetail where concat(id,brand,type,service,processing,gas,produceType,linkId,brief,detail) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from spproductdetail where concat(id,brand,type,service,processing,gas,produceType,linkId,brief,detail) like '%${value}%'
+    </select>
+
+    <select id="selectByLinkId" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spproductdetail">
+        select * from spproductdetail where linkId=#{id}
+    </select>
+</mapper>

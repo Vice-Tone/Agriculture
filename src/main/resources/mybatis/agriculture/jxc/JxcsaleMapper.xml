@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.jxc.mapper.JxcsaleMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcsale">
+      SELECT * FROM jxcsale where typeId=#{typeId}  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcsale">
+      select * from jxcsale where typeId=#{typeId} and concat(id,customer,receiptsCode,goodInfo,receiptsdate,receiptslongdate,operator,total,tax,discount,realMoney,typeId) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from jxcsale where typeId=#{typeId} and concat(id,customer,receiptsCode,goodInfo,receiptsdate,receiptslongdate,operator,total,tax,discount,realMoney,typeId) like '%${value}%'
+    </select>
+
+    <select id="selectCountTypeId" resultType="int">
+        select count(*) from jxcsale where typeId=#{typeId}
+    </select>
+</mapper>

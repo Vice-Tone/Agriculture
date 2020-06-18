@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.pde.mapper.PdeworkerdutyMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeworkerduty">
+      SELECT * FROM pdeworkerduty order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeworkerduty">
+      select * from pdeworkerduty where concat(id,stage,produce,finishTime,chargecode,chargename) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from pdeworkerduty where concat(id,stage,produce,finishTime,chargecode,chargename) like '%${value}%'
+    </select>
+
+    <select id="selectByMobile" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeworkerduty">
+        select * FROM pdeworkerduty where chargecode=#{loginName} order by id desc  limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectCountByMobile" resultType="int">
+        select count(*) from pdeworkerduty where chargecode=#{loginName}
+    </select>
+
+</mapper>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品详情页</title>
+    <link href="layui/css/layui.css" rel="stylesheet" type="text/css">
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link href="css/good-detail.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="header"></div>
+    <div class="main">
+        <div id="name" class="name"></div>
+        <div class="intro">
+            <div class="img-wrap">
+                <img id="mainImg" src="" width="300" height="300">
+            </div>
+            <div class="info">
+                <div class="price">
+                    <span>价格</span>
+                    <b id="price"></b>
+                </div>
+                <div>
+                    <span>型号</span>
+                    <b id="xinghao"></b>
+                </div>
+                <div>
+                    <span>品牌</span>
+                    <b id="brand"></b>
+                </div>
+                <div>
+                    <span>所在地</span>
+                    <b id="location"></b>
+                </div>
+                <div>
+                    <span>厂商性质</span>
+                    <b id="company"></b>
+                </div>
+                <div class="btn-wrap">
+                    <button id="realMoney" class="layui-btn layui-btn-danger">立即下单</button>
+                    <button id="contact" class="layui-btn layui-btn-danger">联系方式</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="left-bar">
+            <h2>产品分类</h2>
+            <ul id="categoryList"></ul>
+        </div>
+        <div class="right-bar">
+            <div class="detail">
+                <div class="title">
+                    <h3>产品简介</h3>
+                </div>
+                <div class="text">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th width="15%">品牌</th>
+                                <td class="brand" width="35%"></td>
+                                <th width="15%">产品类型</th>
+                                <td id="type" width="35%"></td>
+                            </tr>
+                            <tr>
+                                <th width="15%">售后服务</th>
+                                <td id="service" width="35%"></td>
+                                <th width="15%">生产类型</th>
+                                <td id="produceType" width="35%"></td>
+                            </tr>
+                            <tr>
+                                <th width="15%">外形尺寸</th>
+                                <td id="gas" width="35%"></td>
+                                <th width="15%">processing</th>
+                                <td id="processing" width="35%"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+            <div class="layui-tab layui-tab-card" style="width: 818px;">
+                <ul class="layui-tab-title">
+                  <li class="layui-this">详细介绍</li>
+                  <li>图片详情</li>
+                </ul>
+                <div class="layui-tab-content">
+                  <div class="layui-tab-item layui-show des"></div>
+                  <div class="layui-tab-item img-box"></div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="layui/layui.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/good-detail.js"></script>
+</body>
+
+</html>

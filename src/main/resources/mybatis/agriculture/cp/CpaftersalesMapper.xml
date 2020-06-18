@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.cp.mapper.CpaftersalesMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpaftersales">
+      SELECT * FROM cpaftersales order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpaftersales">
+      select * from cpaftersales where concat(id,orderNum,orderName,customername,customName,problem,handleman,handleDetail,process) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from cpaftersales where concat(id,orderNum,orderName,customername,customName,problem,handleman,handleDetail,process) like '%${value}%'
+    </select>
+
+    <select id="listByCode" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpaftersales">
+        SELECT * FROM cpaftersales where handleman=#{loginName} order by id desc  limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectCountByCode" resultType="int">
+        SELECT count(*) FROM cpaftersales where handleman=#{loginName}
+    </select>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.sp.mapper.SpimageMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spimage">
+      SELECT * FROM spimage limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spimage">
+      select * from spimage where concat(id,linkId,imageUrl) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from spimage where concat(id,linkId,imageUrl) like '%${value}%'
+    </select>
+
+    <select id="selectByLinkId" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spimage">
+        select * from spimage where linkId=#{id}
+    </select>
+
+</mapper>

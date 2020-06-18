@@ -1,0 +1,86 @@
+.main{
+    width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main #content{
+    width: 800px;
+}
+
+.main #content h1{
+    text-align: center;
+    padding: 0 20px;
+}
+
+.main #content .time-wrap{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin-top: 20px;
+    border-bottom: 1px dotted #dbdbdb;
+    line-height: 40px;
+    font-size: 12px;
+}
+
+.main #content .time,.main #content .source{
+    margin-right: 10px;
+}
+
+.main #content img{
+    width: 500px;
+}
+
+.main #content .essay{
+    font: 16px "SimSun","Tahoma","Arial","Microsoft Yahei";
+    line-height: 30px;
+    padding: 10px;
+}
+
+.main .right-bar{
+    width: 300px;
+}
+
+.main .right-bar .information {
+    border: 1px solid #f4f4f4;
+    border-top: 2px solid #f4f4f4;
+    padding: 0 12px 8px 12px;
+}
+
+.main .right-bar .information .list-title{
+    border-bottom: 2px dashed #f4f4f4;
+}
+
+.main .right-bar .information .list-title h2{
+    display: inline-block;
+    font-size: 18px;
+    line-height: 55px;
+    border-top: 3px solid #0288D1;
+    position: relative;
+    top: -2px;
+}
+
+.main .right-bar .information .list-title h2 i{
+    color: #0288D1;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.main .right-bar .information ul li{
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+}
+
+.main .right-bar .information ul li span{
+    display: inline-block;
+    width: 24px;
+    height: 20px;
+    margin-right: 4px;
+    line-height: 20px;
+    border: 1px solid #0288D1;
+    color: #0288D1;
+    text-align: center;
+}

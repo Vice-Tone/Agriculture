@@ -1,0 +1,144 @@
+* {
+	margin: 0;
+    padding: 0;
+}
+
+body{
+    color: #333333;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+	border: 0;
+}
+
+textarea{
+    resize: none!important;
+}
+
+.nav-wrap{
+    width: 100%;
+    height: 50px;
+    background: #0288D1;
+}
+
+.nav{
+    width: 1200px;
+    height: 50px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 50px;
+    margin: 0 auto;
+}
+
+.nav-l{
+    float: left;
+}
+
+.nav-r{
+    float: right;
+}
+
+.nav a{
+    margin: 0 6px;
+    color: #ffffff;
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.footer{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p{
+    text-align: center;
+    color: #666666;
+    margin: 30px auto 15px;
+    width: 1200px;
+    font-size: 12px;
+}
+
+.footer a{
+    margin: 0 5px;
+}
+ 
+/* 登录注册 */
+#loginForm{
+    border-radius: 12px;
+}
+
+#loginForm .layui-form-label{
+    width: 48px;
+}
+
+#loginForm .layui-tab-title .layui-this {
+    color: #0288D1;
+    position: relative;
+}
+
+#loginForm .layui-tab-title .layui-this::after{
+    width: 30px;
+    border-bottom: 2px solid #0288D1;
+    position: absolute;
+    left: 34px;
+}
+
+#loginForm .layui-tab-content {
+    padding: 30px 34px 10px 34px;
+}
+
+#loginForm .layui-input-block {
+    margin-left: 0;
+}
+
+#loginForm .layui-input-block input{
+    height: 48px;
+    border-radius: 8px;
+    background: rgba(28,31,33,.06);
+}
+
+#loginForm .error{
+    font-size: 12px;
+    color: #f20d0d;
+}
+
+#loginForm .tip{
+    font-size: 12px;
+    color: #717a84;
+    text-align: center;
+}
+
+#loginForm .tip a{
+    color: #37f;
+}
+
+#loginForm .submit{
+    display: block;
+    width: 198px;
+    margin: 12px auto 0;
+    border-radius: 24px;
+    background-color: #0288D1;
+}
+
+#loginForm .layui-form-radio>i:hover, #loginForm .layui-form-radioed>i {
+    color: #0288D1;
+}
+
+#loginForm .layui-form-checked[lay-skin=primary] i {
+    border-color: #0288D1!important;
+    background-color: #0288D1;
+}
+
+#loginForm .layui-form-checkbox[lay-skin=primary]:hover i {
+    border-color: #0288D1;
+}

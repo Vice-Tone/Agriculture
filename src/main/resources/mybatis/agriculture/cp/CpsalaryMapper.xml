@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.cp.mapper.CpsalaryMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpsalary">
+      SELECT * FROM cpsalary order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpsalary">
+      select * from cpsalary where concat(id,code,name,dept,salary,hance,createTime,deptId,leadercode) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from cpsalary where concat(id,code,name,dept,salary,hance,createTime,deptId,leadercode) like '%${value}%'
+    </select>
+
+    <select id="selectByCodeDayTime" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpsalary">
+        select * from cpsalary where code=#{code} and createTime=#{dayTime}
+    </select>
+
+    <select id="selectMySalary" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpsalary">
+        select * from cpsalary where code=#{loginName} order by id desc  limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectMySalaryCount" resultType="int">
+        select count(id) from cpsalary where code=#{loginName}
+    </select>
+
+</mapper>

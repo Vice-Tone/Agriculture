@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/addForm.css">
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>列表</legend>
+</fieldset>
+<div class="demoTable">
+    <div class="layui-inline">
+        <input class="layui-input" placeholder="输入关键字搜索：" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+<script src="/layui/layui.all.js"></script>
+<script src="/layui/jquery-3.3.1.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+
+<script type="text/javascript">
+    let layer;
+    let table;
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider', 'form'], function () {
+        let laydate = layui.laydate //日期
+            , layer = layui.layer //弹层
+            , table = layui.table; //表格
+        let form = layui.form;
+        table.render({
+            elem: '#demo'
+            , url: '/spadvitisement/list' //数据接口
+            , method: 'get'
+            , id: 'allAltTable'
+            , request: {
+                pageName: 'pageIndex'
+                , limitName: 'pageSize'
+            }
+            , title: '列表'
+            , page: true //开启分页
+            , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            , totalRow: false //开启合计行
+            , cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'id', title: '编号',hide:true}
+                    , {field: 'name', title: '广告位位置'}
+                    , {field: 'image', title: '广告位图片',templet: '<div><img alt="暂无" src="{{d.image}}" style="width:108px;height:100px"></div>'}
+                    , {fixed: 'right', title: '操作', align: ' ', toolbar: '#barDemo'}
+                ]
+            ]
+            , done: function () {//设置某列隐藏
+                $("[data-field='typeId']").css('display', 'none');
+            }
+        });
+        var $ = layui.$, active = {
+            reload: function () {
+                var demoReload = $('#demoReload');
+                //执行重载
+                table.reload('allAltTable', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    url: "/spadvitisement/conditionlSel?value=" + demoReload.val()
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        table.on('tool(test)', function (obj) {
+            let data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'edit') {
+                let index = layer.open({
+                    type: 1
+                    , title: '修改信息'
+                    , area: ['500px', 'auto']
+                    , offset: '100px'
+                    , content: ` <form class='layui-form' action="" id='addForm'>
+                        <div class='layui-form-item' style="display: none">
+                            <label class='layui-form-label' >编号</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='id' required  lay-verify='required'  value='${data.id}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >广告位位置</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='name' required  lay-verify='required'  value='${data.name}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item' style="display: none">
+                            <label class='layui-form-label' >广告位图片</label>
+                            <div class='layui-input-block'>
+                                <input type='text' name='image' id="image" required  lay-verify='required'  value='${data.image}'  autocomplete='off' class='layui-input'>
+                            </div>
+                        </div>
+                        <div class='layui-form-item'>
+                            <label class='layui-form-label' >广告位图片</label>
+                            <div class='layui-input-block'>
+                                <input type='file' id='myfile'    autocomplete='off' class='layui-input'>
+                                <img src="${data.image}">
+                            </div>
+                        </div>
+
+                        <div class='layui-form-item'>
+                            <div class='layui-input-inline' id='btngroup'>
+                                <button type='button' class='layui-btn layui-btn-normal' lay-submit lay-filter='adduser'>修改</button>
+                                <button type='reset' class='layui-btn layui-btn-primary'>重置</button>
+                            </div>
+                        </div>
+                    </form>`
+                    , success: function () {
+                        //同时绑定多个
+                        lay('.test-item').each(function () {
+                            laydate.render({
+                                elem: this
+                                , trigger: 'click'
+                                , type: 'date'
+                                , format: 'yyyy-MM-dd'
+                            });
+                        });
+
+                        $("#myfile").change(function () {
+                            $imginfo = $(this).get(0).files[0];
+                            var fr = new FileReader();
+                            fr.readAsDataURL($imginfo); //发起异步请求
+                            fr.onload = function () {
+                                //读取完成后，数据保存在对象的 result 属性中
+                                pic = this.result; //pic中保存的就是base64编码，带头部的
+                                $("#image").val(pic);
+                            }
+                        });
+
+
+                        form.render('select');
+                        form.on('submit(adduser)', function (data) {
+                            let userData = data.field;
+                            $.ajax({
+                                type: 'POST',
+                                data: userData
+                                , dataType: 'json'
+                                , url: '/spadvitisement/edit'
+                                , success: function (res) {
+                                    //0 成功
+                                    //500 失败
+                                    if (res.code === 0) {
+
+                                        setTimeout(function () {
+                                            alert('修改成功');
+                                            layer.close(index);
+                                            window.location.reload();
+                                        }, 1000);
+
+                                    } else {
+
+                                        setTimeout(function () {
+                                            alert('修改失败');
+                                            layer.close(index);
+                                            window.location.reload();
+                                        }, 1000);
+
+                                    }
+                                }
+                                , error: function (msg) {
+                                    layer.msg('网络异常，请重试');
+                                }
+                            })
+                        })
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

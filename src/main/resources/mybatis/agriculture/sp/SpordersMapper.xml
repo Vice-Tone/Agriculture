@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.sp.mapper.SpordersMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.sp.pojo.Sporders">
+      SELECT * FROM sporders order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.sp.pojo.Sporders">
+      select * from sporders where concat(id,productName,mainUrl,orderTime,price,userId,brand,location,stat) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="listByUsername" resultType="com.ruoyi.project.agricultrue.sp.pojo.Sporders">
+         select * from sporders where userId=#{username}
+    </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from sporders where concat(id,productName,mainUrl,orderTime,price,userId,brand,location,stat) like '%${value}%'
+    </select>
+
+    <select id="getList" resultType="java.util.Map">
+        select count(*) as num,brand from sporders group by brand
+    </select>
+</mapper>

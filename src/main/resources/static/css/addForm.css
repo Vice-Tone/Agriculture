@@ -1,0 +1,15 @@
+#addForm {
+    width: 92%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    padding: 20px;
+}
+
+#addForm .layui-form-label {
+    padding: 10px 0;
+}
+
+#addForm #btngroup {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}

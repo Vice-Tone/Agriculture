@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.jxc.mapper.JxccustmerMapper">
+
+  <select id="list" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxccustmer">
+      SELECT * FROM jxccustmer limit #{pageIndex},#{pageSize}
+  </select>
+
+ <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxccustmer">
+      select * from jxccustmer where concat(id,name,gender,phone,email,postcode,company,position) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from jxccustmer where concat(id,name,gender,phone,email,postcode,company,position) like '%${value}%'
+    </select></mapper>

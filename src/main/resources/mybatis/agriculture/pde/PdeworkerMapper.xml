@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.pde.mapper.PdeworkerMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeworker">
+      SELECT * FROM pdeworker limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeworker">
+      select * from pdeworker where concat(id,name,gender,dept,post,mobile,processing,workage) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from pdeworker where concat(id,name,gender,dept,post,mobile,processing,workage) like '%${value}%'
+    </select>
+
+    <select id="selectMySelf" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeworker">
+         select * from pdeworker where mobile=#{loginName}
+    </select>
+</mapper>

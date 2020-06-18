@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业问答</title>
+    <link href="layui/css/layui.css" rel="stylesheet" type="text/css">
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link href="css/offers.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="nav"></div>
+    <div class="main">
+        <div id="content"></div>
+        <div class="publish" id="publish"><i class="layui-icon layui-icon-survey"></i>
+            发表问题</div>
+    </div>
+    <div id="footer"></div>
+
+    <form class="layui-form" id="publishForm" enctype="multipart/form-data" style="display: none">
+        <div class="layui-form-item">
+            <label class="layui-form-label">输入内容</label>
+            <div class="layui-input-block">
+                <textarea name="content" required lay-verify="required" placeholder="请输入内容" class="layui-textarea" id="question"></textarea>
+            </div>
+        </div>
+    
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="sublit" >立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="layui/layui.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/question.js"></script>
+</body>
+</html>

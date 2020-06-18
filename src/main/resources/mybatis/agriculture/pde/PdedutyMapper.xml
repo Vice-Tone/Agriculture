@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.pde.mapper.PdedutyMapper">
+
+  <select id="list" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeduty">
+      SELECT * FROM pdeduty limit #{pageIndex},#{pageSize}
+  </select>
+
+ <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdeduty">
+      select * from pdeduty where concat(id,stage,content,finishTime,dept,charge) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from pdeduty where concat(id,stage,content,finishTime,dept,charge) like '%${value}%'
+    </select></mapper>

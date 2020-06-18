@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.sp.mapper.SpproductMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spproduct">
+      SELECT * FROM spproduct limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spproduct">
+      select * from spproduct where concat(id,name,mainUrl,xinghao,brand,company,location,price,mobile,realMoney,updateTime,typeName,typeId) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from spproduct where concat(id,name,mainUrl,xinghao,brand,company,location,price,mobile,realMoney,updateTime,typeName,typeId) like '%${value}%'
+    </select>
+
+    <select id="selectByTypeId" resultType="com.ruoyi.project.agricultrue.sp.pojo.Spproduct">
+         SELECT * FROM spproduct where typeId=#{typeId} limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectByTypeIdCount" resultType="int">
+        select count(*) from spproduct where typeId=#{typeId}
+    </select>
+
+</mapper>

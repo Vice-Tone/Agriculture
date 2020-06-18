@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.jxc.mapper.JxcwareinfoMapper">
+
+  <select id="list" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcwareinfo">
+      SELECT * FROM jxcwareinfo limit #{pageIndex},#{pageSize}
+  </select>
+
+ <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcwareinfo">
+      select * from jxcwareinfo where concat(id,warename,warelocation,storefee,transfee,charge,chargephone) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from jxcwareinfo where concat(id,warename,warelocation,storefee,transfee,charge,chargephone) like '%${value}%'
+    </select></mapper>

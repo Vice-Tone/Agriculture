@@ -1,0 +1,159 @@
+.main{
+    width: 1200px;
+    margin: 0 auto 20px;
+}
+
+.main .name{
+    font-size: 26px;
+    padding-left: 40px;
+    margin-bottom: 30px;
+}
+
+.main .intro{
+    display: flex;
+    justify-content: center;
+}
+
+.main .img-wrap{
+    width: 520px;
+}
+
+.main .info{
+    width: 580px;
+}
+
+.main .info div{
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    color: #999999;
+}
+
+.main .info div span{
+    display: inline-block;
+    width: 120px;
+}
+
+.main .info div b{
+    font-weight: normal;
+    color: #333333;
+}
+
+.main .price{
+    width: 100%;
+    background: #f5f5f5;
+    padding: 5px 0;
+    margin-bottom: 20px;
+}
+
+.main .price #price{
+    font-size: 20px;
+    font-weight: bold;
+    color: #e54249;
+}
+
+.main .info .btn-wrap{
+    margin-top: 20px;
+}
+
+.main .info .btn-wrap button{
+    font-size: 18px;
+    height: 42px;
+    line-height: 42px;
+    padding: 0 20px;
+    margin-right: 20px;
+}
+
+.content {
+    width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content .left-bar{
+    width: 260px;
+}
+
+.content .left-bar h2{
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    color: #ff5722;
+    font-size: 16px;
+    font-weight: bold;
+    border: 3px solid #FF5722;
+}
+
+.content .left-bar ul{
+    width: 258px;
+    border: 1px solid #e2e2e2;
+    background-color: #ededf0;
+}
+
+.content .left-bar ul li{
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    text-indent: 16px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.content .left-bar ul li:hover{
+    background-color: #ffffff;
+}
+
+.content .right-bar .detail{
+    width: 818px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #d6d6d7;
+    box-shadow: 0 0 1px 1px #e9e9e9;
+}
+
+.content .detail .title{
+    width: 100%;
+    height: 47px;
+    border-bottom: 1px solid #ebebeb;
+    text-indent: 22px;
+}
+
+.content .detail .title h3{
+    border-left: 2px solid #0288d1;
+    font-weight: bold;
+    position: relative;
+    top: 11px;
+}
+
+.content .detail .text{
+    padding: 18px 22px 25px;
+} 
+
+.content .detail .text table{
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+} 
+
+.content .detail .text table th {
+    height: 35px;
+    padding: 0 10px;
+    line-height: 35px;
+    text-align: left;
+    background: #f5f5f5;
+    border: 1px solid #e8e8eb;
+    color: #666;
+}
+
+.content .detail .text table td {
+    height: 35px;
+    padding: 0 10px;
+    line-height: 35px;
+    text-align: left;
+    border: 1px solid #e8e8eb;
+    color: #828180;
+}
+
+.content .img-box{
+    text-align: center;
+}

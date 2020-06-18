@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.pde.mapper.PdesubmissionMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdesubmission">
+      SELECT * FROM pdesubmission order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.pde.pojo.Pdesubmission">
+      select * from pdesubmission where concat(id,name,stau,createTime,parentId) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from pdesubmission where concat(id,name,stau,createTime,parentId) like '%${value}%'
+    </select>
+
+    <select id="selectAllParentId" resultType="int">
+        select count(*) from pdesubmission where parentId=#{parentId}
+    </select>
+
+    <select id="selectFinishedParentId" resultType="int">
+        select count(*) from pdesubmission where parentId=#{parentId} and stau='已完成'
+    </select>
+
+
+
+</mapper>

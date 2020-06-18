@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索框</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <style>
+        .search {
+            display: flex;
+            align-items: center;
+            width: 430px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url:"/shop/spimage/selectById?id=1",
+                dataType:"json",
+                success:function (ret) {
+                    $("#headerImg").attr('src',ret.data.image);
+                    $("#headerImg").css({"height":"100px","margin-left":"10%","width":"1200px"});
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+<div class="head">
+    <div class="logo">
+        <img src="http://www.nongjx.com/images/index/2016logo.jpg">
+        <img src="http://www.nongjx.com/images/product_list2016/weishopLogo.png" alt="">
+    </div>
+    <div class="search">
+        <input class="layui-input" placeholder="请输入关键字" id="keyword" type="text" style="border-radius: 0px;">
+        <button class="layui-btn" id="search" style="border-radius: 0px; background: #0288D1;">搜索</button>
+    </div>
+</div>
+<div>
+    <img id="headerImg"  alt="暂无哦">
+</div>
+
+<script src="js/search.js"></script>
+</body>
+
+</html>

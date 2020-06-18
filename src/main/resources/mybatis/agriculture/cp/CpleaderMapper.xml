@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.cp.mapper.CpleaderMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpleader">
+      SELECT * FROM cpleader order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpleader">
+      select * from cpleader where concat(id,code,name,gender,phone,email,dept,deptId) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from cpleader where concat(id,code,name,gender,phone,email,dept,deptId) like '%${value}%'
+    </select>
+
+    <select id="selectMySelf" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpleader">
+        select * from cpleader where code=#{loginName}
+    </select>
+
+</mapper>

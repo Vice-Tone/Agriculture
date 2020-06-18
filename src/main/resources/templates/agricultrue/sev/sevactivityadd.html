@@ -1,0 +1,127 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>文本编辑</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" charset="utf-8" th:src="@{/uEditor/ueditor.config.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/uEditor/ueditor.all.min.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/uEditor/lang/zh-cn/zh-cn.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/addForm.css">
+    <style type="text/css">
+        .divButton {
+            text-align: left;
+            margin: 6px;
+        }
+    </style>
+</head>
+<script src="/layui/layui.all.js"></script>
+<script src="/layui/jquery-3.3.1.js"></script>
+<body>
+<table width="800" border="0" align="center">
+    <tr>
+        <td align="center">
+            <div>
+                <h1>文本编辑</h1>
+                <form class="layui-form" id="addForm">
+                    <div class='layui-form-item' style="display: none">
+                        <label class='layui-form-label'>主图</label>
+                        <div class='layui-input-block'>
+                            <input type='text' name='mainUrl' id="mainUrl" required lay-verify='required'
+                                   autocomplete='off'
+                                   class='layui-input'>
+                        </div>
+                    </div>
+                    <div class='layui-form-item'>
+                        <label class='layui-form-label'>请选择</label>
+                        <div class='layui-input-block'>
+                            <input type='file' id='myfile' autocomplete='off' class='layui-input'>
+                        </div>
+                    </div>
+                    <div class='layui-form-item'>
+                        <label class='layui-form-label'>标题</label>
+                        <div class='layui-input-block'>
+                            <input type='text' name='title' id="title" required lay-verify='required' autocomplete='off'
+                                   class='layui-input'>
+                        </div>
+                    </div>
+                    <script id="editor" type="text/plain"></script>
+                    <div class='layui-form-item'>
+                        <label class='layui-form-label'>来源</label>
+                        <div class='layui-input-block'>
+                            <input type='text' name='psource' id="psource" required lay-verify='required'
+                                   autocomplete='off'
+                                   class='layui-input'>
+                        </div>
+                    </div>
+                    <div class='layui-form-item'>
+                        <label class='layui-form-label'>发布时间</label>
+                        <div class='layui-input-block'>
+                            <input type='text' name='publishTime' id="publishTime" required lay-verify='required'
+                                   autocomplete='off'
+                                   class='layui-input test-item'>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="btns">
+                <div class="divButton">
+                    <button id="subButton" onclick="getActivityContent()">提交</button>
+                </div>
+            </div>
+            <hr/>
+            <div id="divApiCallInfo"></div>
+            <hr/>
+        </td>
+    </tr>
+</table>
+</div>
+<script type="text/javascript" charset="utf-8" th:src="@{/js/uEditorDemo.js}"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#myfile").change(function () {
+            $imginfo = $(this).get(0).files[0];
+            var fr = new FileReader();
+            fr.readAsDataURL($imginfo); //发起异步请求
+            fr.onload = function () {
+                //读取完成后，数据保存在对象的 result 属性中
+                pic = this.result; //pic中保存的就是base64编码，带头部的
+                $("#mainUrl").val(pic);
+            }
+        });
+        $("#subButton").click(function () {
+            var val = UE.getEditor('editor').getContent();
+
+            if (val === "") {
+                alert("内容为空，不能提交");
+                return;
+            }
+            $.ajax({
+                url: "/sevactivity/add",
+                type: "POST",
+                data: {
+                    "content": val,
+                    "publishTime": $("#publishTime").val(),
+                    "psource": $("#psource").val(),
+                    "title": $("#title").val(),
+                    "mainUrl": $("#mainUrl").val()
+                },
+                dataType: "json",
+                success: function (ret) {
+                    if (ret.code === 0) {
+                        alert("提交成功！");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        alert("提交失败！");
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

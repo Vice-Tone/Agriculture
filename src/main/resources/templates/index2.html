@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 全局js -->
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "/app/section/list",
+                type: "GET",
+                dataType: "json",
+                success: function (ret) {
+                    let data = ret.data;//获取数据
+                    var array = [];
+                    array = data.split(",");
+                    for (var i = 0; i < array.length; i++) {
+                        var tmp = [];
+                        tmp = array[i];
+                        var tmp2 = tmp.split(":");
+                        console.log(" ---> " + tmp2[0]);
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

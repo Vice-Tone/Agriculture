@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商城</title>
+    <link href="layui/css/layui.css" rel="stylesheet" type="text/css">
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link href="css/sell.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="nav"></div>
+    <div id="header"></div>
+    <div class="main">
+        <div class="reports">
+            共找到<span id="num"></span>条符合<span id="keyword"></span>的产品
+        </div>
+        <div class="category">
+            <span>产品类目</span>
+            <ul id="categoryList"></ul>
+            <div class="layui-clear"></div>
+        </div>
+        <div class="product">
+            <div class="title">相关产品</div>
+            <ul id="productList"></ul>
+        </div>
+        <div class="news">
+            <div class="news-box">
+                <div class="news-top">
+                    <h3><a href="" target="_blank">相关资讯</a></h3>
+					<a class="more" href="" target="_blank">更多</a>
+                </div>
+                <ul id="infoList"></ul>
+            </div>
+            <div class="news-box">
+                <div class="news-top">
+                    <h3><a href="" target="_blank">技术文章</a></h3>
+					<a class="more" href="" target="_blank">更多</a>
+                </div>
+                <ul id="techList"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="layui/layui.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/sell.js"></script>
+</body>
+</html>

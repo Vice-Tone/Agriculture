@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.jxc.mapper.JxcbuyorderMapper">
+
+  <select id="list" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcbuyorder">
+      SELECT * FROM jxcbuyorder limit #{pageIndex},#{pageSize}
+  </select>
+
+ <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcbuyorder">
+      select * from jxcbuyorder where concat(id,supplier,receiptsCode,goodInfo,receiptsdate,receiptslongdate,operator,total) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from jxcbuyorder where concat(id,supplier,receiptsCode,goodInfo,receiptsdate,receiptslongdate,operator,total) like '%${value}%'
+    </select></mapper>

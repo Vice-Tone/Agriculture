@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.jxc.mapper.JxcwareinMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcwarein">
+      SELECT * FROM jxcwarein limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcwarein">
+      select * from jxcwarein where concat(id,suppiler,receiptsCode,goodInfo,receiptsdate,receiptslongdate,operator) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from jxcwarein where concat(id,suppiler,receiptsCode,goodInfo,receiptsdate,receiptslongdate,operator) like '%${value}%'
+    </select>
+
+    <select id="selectByNum" resultType="java.lang.String">
+        select goodInfo from jxcwarein where num <![CDATA[<]]> #{num}
+    </select>
+
+    <select id="getList" resultType="com.ruoyi.project.agricultrue.jxc.pojo.Jxcwarein">
+       select * from jxcwarein where receiptslongdate <![CDATA[>=]]> #{datemillsStart} and receiptslongdate <![CDATA[<=]]> #{datemillsEnd}
+    </select>
+
+</mapper>

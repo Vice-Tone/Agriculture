@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.project.agricultrue.cp.mapper.CpworkerMapper">
+
+    <select id="list" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpworker">
+      SELECT * FROM cpworker order by id desc  limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSel" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpworker">
+      select * from cpworker where concat(id,code,name,gender,phone,email,dept,deptId,leadercode) like '%${value}%' limit #{pageIndex},#{pageSize}
+  </select>
+
+    <select id="conditionlSelCount" resultType="int">
+        select count(*) from cpworker where concat(id,code,name,gender,phone,email,dept,deptId,leadercode) like '%${value}%'
+    </select>
+
+    <select id="selectMySelf" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpworker">
+        select * from cpworker where code=#{loginName}
+    </select>
+
+    <select id="selectDeptWorkers" resultType="com.ruoyi.project.agricultrue.cp.pojo.Cpworker">
+        select * from cpworker where leadercode=#{loginName} order by id desc limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectDeptWorkersCount" resultType="int">
+        select count(id) from cpworker where leadercode=#{loginName}
+    </select>
+</mapper>
