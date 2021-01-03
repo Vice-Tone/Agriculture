@@ -2,17 +2,13 @@ package com.ruoyi;
 
 import com.ruoyi.common.utils.SnowflakeIdWorker;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.util.StringUtils;
 
 /* 启动程序
+* 新增
 * 销售部selling roleId 15
 * 营销部business roleId 16
 * */
